@@ -1,6 +1,41 @@
 * {
+    color: lightgoldenrodyellow;
+    font-family: "Courier New", Courier, monospace; 
+}
 
-    /* You can remove this line whenever you want, it is here for testing purposes */
-    border: 1px solid black;
-    
+body {
+    margin: 0px;
+    display: grid;
+    grid-template-areas: "header header header" "left main right" "footer footer footer";
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+#header, #footer {
+    background-color: violet;
+}
+
+#left, #right {
+    background-color: darkturquoise;
+}
+
+#main {
+    background-color: plum;
+    grid-area: main;
+}
+
+#header {
+    grid-area: header;
+}
+
+#footer {
+    grid-area: footer;
+}
+
+#left {
+    grid-area: left;
+}
+
+#right {
+    grid-area: right;
 }
