@@ -6,7 +6,7 @@
 body {
     margin: 0px;
     display: grid;
-    grid-template-areas: "header header header" "left main right" "footer footer footer";
+    grid-template-areas: "header header" "sidebar main" "footer footer";
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
@@ -15,13 +15,14 @@ body {
     background-color: violet;
 }
 
-#left, #right {
-    background-color: darkturquoise;
-}
-
 #main {
     background-color: plum;
     grid-area: main;
+}
+
+#sidebar {
+    background-color: darkturquoise;
+    grid-area: sidebar;
 }
 
 #header {
@@ -32,10 +33,12 @@ body {
     grid-area: footer;
 }
 
-#left {
-    grid-area: left;
-}
+@media screen and (max-width: 600px) {
 
-#right {
-    grid-area: right;
+    body {
+        grid-template-areas: "header" "main" "sidebar" "footer";
+        grid-template-rows: auto 1fr 1fr auto;
+        min-height: 100vh;
+    }
+    
 }
