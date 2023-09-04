@@ -69,6 +69,12 @@ table {
 .typeTable * {
     border: 1px solid plum;
     color: plum;
+    padding: 3px 30px 3px 15px;
+}
+
+#offenseTablesContainer {
+    display: flex;
+    gap: 5px;
 }
 
 @media screen and (max-width: 600px) {
