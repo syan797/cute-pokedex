@@ -38,6 +38,23 @@ body {
     grid-area: footer;
 }
 
+#allPokemonTable {
+    border-collapse: collapse;
+    border: 1px solid lightgoldenrodyellow;
+    width: 100%;
+    text-align: center;
+}
+
+td {
+    border: 1px solid lightgoldenrodyellow;
+    padding: 5px 20px;
+}
+
+#allPokemonTable tr:nth-child(odd) td {
+    background-color: lightgoldenrodyellow;
+    color: darkturquoise;
+}
+
 @media screen and (max-width: 600px) {
 
     body {
