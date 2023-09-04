@@ -50,12 +50,7 @@ window.addEventListener("load", function(){
         insertImage(pokemonObj.imageUrl, pokemonObj.name);
         insertPokedexNum(pokemonObj.dexNumber);
         insertDescription(pokemonObj.dexEntry);
-        
-        let typesArray = pokemonObj.types;
-        insertTypesList(typesArray);
-        typesArray.forEach((type) => addOffenseTable(type));
-
-        addDefenseTable(pokemonObj.dexNumber);
+        insertTypeInfo(pokemonObj);
     }
 
     function insertName(name) {
@@ -81,21 +76,35 @@ window.addEventListener("load", function(){
         descripBox.innerText = description;
     }
 
-    function insertTypesList(typesArray) {
-        let typesList = document.querySelector("#typesList");
+    function insertTypeInfo(pokemonObj) {
+        let typesList = getAndClearContainer("#typesList");
+        let offenseInfo = getAndClearContainer("#offenseTablesContainer");
+        let defenseInfo = getAndClearContainer("#defenseTBody");
         
+        let typesArray = pokemonObj.types;
+        insertTypesList(typesArray, typesList);
+        typesArray.forEach((type) => addOffenseTable(type, offenseInfo));
+        addDefenseTable(pokemonObj.dexNumber, defenseInfo);
+    }
+    
+    function insertTypesList(typesArray, container) {
         for (let i = 0; i < typesArray.length; i++) {
             type = typesArray[i];
-            typesList.innerHTML += type;
+            container.innerHTML += type;
             if (i != typesArray.length-1) {
-                typesList.innerHTML += ", ";
+                container.innerHTML += ", ";
             }
         }
     }
+    
+    function getAndClearContainer(selector) {
+        let container = document.querySelector(selector);
+        container.innerHTML = "";
+        return container;
+    }
 
-    async function addOffenseTable(type) {
+    async function addOffenseTable(type, container) {
         //Setting up the table
-        let offenseTables = document.querySelector("#offenseTablesContainer");
         let table = document.createElement("table");
         table.classList.add("typeTable");
         table.innerHTML =   `<thead>
@@ -106,7 +115,7 @@ window.addEventListener("load", function(){
                                     <th>Defending type</th><th>Damage dealt</th>
                                 </tr>
                             </thead>`;
-        offenseTables.appendChild(table);
+        container.appendChild(table);
         let tbody = document.createElement("tbody");
         table.appendChild(tbody);
 
@@ -119,16 +128,13 @@ window.addEventListener("load", function(){
         offenseArray.forEach((rowInfo) => addRowInfo(rowInfo, tbody));
     }
 
-    async function addDefenseTable(dexNum) {
-        //Getting the tbody of the table
-        let tbody = document.querySelector("#defenseTBody");
-
+    async function addDefenseTable(dexNum, container) {
         //Retrieving the defense data
         let defenseResponse = await fetch(`https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/${dexNum}/defense-profile`);
         let defenseArray = await defenseResponse.json();
         
         //Adding the data to the table
-        defenseArray.forEach((rowInfo) => addRowInfo(rowInfo, tbody));
+        defenseArray.forEach((rowInfo) => addRowInfo(rowInfo, container));
     }
 
     function addRowInfo(rowInfo, tbody) {
