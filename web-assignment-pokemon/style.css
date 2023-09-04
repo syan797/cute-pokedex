@@ -38,14 +38,17 @@ body {
     grid-area: footer;
 }
 
-#allPokemonTable {
+table {
     border-collapse: collapse;
+}
+
+#allPokemonTable {
     border: 1px solid lightgoldenrodyellow;
     width: 100%;
     text-align: center;
 }
 
-td {
+#allPokemonTable td {
     border: 1px solid lightgoldenrodyellow;
     padding: 5px 20px;
 }
@@ -57,6 +60,15 @@ td {
 
 #typesList {
     font-weight: bold;
+}
+
+.typeTable {
+    background-color: lightgoldenrodyellow;
+}
+
+.typeTable * {
+    border: 1px solid plum;
+    color: plum;
 }
 
 @media screen and (max-width: 600px) {

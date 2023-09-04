@@ -14,19 +14,23 @@
         </div>
 
         <div id="main" class="panel">
-            <div>
-                <h2>Pokemon Details For <span class="pokemonName"></span></h2>
-                <img src="" alt="" id="image">
-                <p><strong>Pokedex number: #<span id="pokedexNum"></span></strong></p>
-                <h3>Description</h3>
-                <p id="description"></p>
-            </div>
-            <div>
-                <h3>Type info</h3>
-                <p><span class="pokemonName"></span>'s type(s): <span id="typesList"></span></p>
-                <h4>On offense:</h4>
-                <h4>On defense:</h4>
-            </div>
+            <h2>Pokemon Details For <span class="pokemonName"></span></h2>
+            <img src="" alt="" id="image">
+            <p><strong>Pokedex number: #<span id="pokedexNum"></span></strong></p>
+            <h3>Description</h3>
+            <p id="description"></p>
+            <h3>Type info</h3>
+            <p><span class="pokemonName"></span>'s type(s): <span id="typesList"></span></p>
+            <h4>On offense:</h4>
+            <div id="offenseTablesContainer"></div>
+            <h4>On defense:</h4>
+            <table class="typeTable">
+                <thead>
+                    <th>Attacking type</th>
+                    <th>Damage received</th>
+                </thead>
+                <tbody id="defenseTBody"></tbody>
+            </table>
         </div>
 
         <div id="sidebar" class="panel">
