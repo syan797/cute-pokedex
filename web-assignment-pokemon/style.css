@@ -1,41 +1,84 @@
+@font-face {
+    font-family: "Bungee";
+    src: url("./fonts/Bungee-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Press Start 2 P";
+    src: url("./fonts/PressStart2P-Regular.ttf");
+}
+
 * {
     color: lightgoldenrodyellow;
-    font-family: "Courier New", Courier, monospace; 
+    font-family: "Bungee", "Courier New", Courier, monospace; 
+    text-shadow: 0px 0px 2px #443A4D;
 }
 
 body {
-    margin: 0px;
+    margin: 20px;
     display: grid;
-    grid-template-areas: "header header" "sidebar main" "footer footer";
-    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "header header" "sidebar pokemonInfo" "sidebar typeInfo" "footer footer";
+    grid-template-rows: auto auto 1fr auto;
     grid-template-columns: auto 1fr;
     min-height: 100vh;
+    background: linear-gradient(to bottom, #B1A2FF, #FFACFE);
+    background-attachment: fixed;
 }
 
 .panel {
     padding: 10px;
+    border-radius: 40px;
+    margin: 10px;
+    border: 6px solid #443A4D;
 }
 
 #header, #footer {
-    background-color: violet;
+    padding-left: 40px;
+    /*line-height: 0; */
+    background: linear-gradient(to bottom, #FFACFE, #FD5AE7);
+    padding-bottom: 30px;
 }
 
-#main {
-    background-color: plum;
-    grid-area: main;
+.main {
+    background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
+    padding: 10px 30px;
+}
+
+.main * {
+    font-family: "Press Start 2 P", "Courier New", Courier, monospace; 
+}
+
+#pokemonInfo {
+    grid-area: pokemonInfo;
+}
+
+#typeInfo {
+    grid-area: typeInfo;
 }
 
 #sidebar {
     background-color: darkturquoise;
     grid-area: sidebar;
+    text-align: center;
+    padding: 0px 20px 30px 20px;
 }
 
 #header {
     grid-area: header;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+h1 {
+    margin: 0px auto;
+    font-size: 50pt;
+    color: lightgoldenrodyellow;
+    text-shadow: 0px 0px 2px #443A4D, 0px 5px 2px #FFDF23, 0px 10px 2px #F2652B, 0px 15px 2px #FD5AE7, 0px 20px 2px #8315B2, 0px 25px 2px aquamarine;
 }
 
 #footer {
     grid-area: footer;
+    padding-bottom: 30px;
 }
 
 table {
@@ -43,6 +86,7 @@ table {
 }
 
 #allPokemonTable {
+    border-radius: 10px;
     border: 1px solid lightgoldenrodyellow;
     width: 100%;
     text-align: center;
@@ -56,6 +100,7 @@ table {
 #allPokemonTable tr:nth-child(odd) td {
     background-color: lightgoldenrodyellow;
     color: darkturquoise;
+    text-shadow: none;
 }
 
 #typesList {
@@ -69,6 +114,7 @@ table {
 .typeTable * {
     border: 1px solid plum;
     color: plum;
+    text-shadow: none;
     padding: 3px 30px 3px 15px;
 }
 
@@ -80,9 +126,13 @@ table {
 @media screen and (max-width: 600px) {
 
     body {
-        grid-template-areas: "header" "main" "sidebar" "footer";
-        grid-template-rows: auto 1fr 1fr auto;
+        grid-template-areas: "header" "pokemonInfo" "typeInfo" "sidebar" "footer";
+        grid-template-rows: auto auto auto 1fr auto;
         grid-template-columns: 1fr;
+    }
+
+    #offenseTablesContainer {
+        flex-wrap: wrap;
     }
     
 }
