@@ -1,16 +1,11 @@
 @font-face {
-    font-family: "Bungee";
-    src: url("./fonts/Bungee-Regular.ttf");
-}
-
-@font-face {
     font-family: "Press Start 2 P";
     src: url("./fonts/PressStart2P-Regular.ttf");
 }
 
 * {
     color: lightgoldenrodyellow;
-    font-family: "Bungee", "Courier New", Courier, monospace; 
+    font-family: "Press Start 2 P", "Courier New", Courier, monospace; 
     text-shadow: 0px 0px 2px #443A4D;
 }
 
@@ -27,8 +22,8 @@ body {
 
 .panel {
     padding: 10px;
-    border-radius: 40px;
     margin: 10px;
+    border-radius: 40px;
     border: 6px solid #443A4D;
 }
 
@@ -42,10 +37,6 @@ body {
 .main {
     background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
     padding: 10px 30px;
-}
-
-.main * {
-    font-family: "Press Start 2 P", "Courier New", Courier, monospace; 
 }
 
 #pokemonInfo {
@@ -65,20 +56,19 @@ body {
 
 #header {
     grid-area: header;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 h1 {
-    margin: 0px auto;
-    font-size: 50pt;
+    font-size: 40pt;
+    margin: 5px auto 25px auto; 
     color: lightgoldenrodyellow;
     text-shadow: 0px 0px 2px #443A4D, 0px 5px 2px #FFDF23, 0px 10px 2px #F2652B, 0px 15px 2px #FD5AE7, 0px 20px 2px #8315B2, 0px 25px 2px aquamarine;
 }
 
 #footer {
     grid-area: footer;
-    padding-bottom: 30px;
 }
 
 table {
@@ -109,9 +99,10 @@ table {
 
 .typeTable {
     background-color: lightgoldenrodyellow;
+    border-radius: 40px;
 }
 
-.typeTable * {
+.typeTable td {
     border: 1px solid plum;
     color: plum;
     text-shadow: none;
