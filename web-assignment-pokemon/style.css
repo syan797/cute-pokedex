@@ -125,6 +125,10 @@ table {
     background: linear-gradient(to bottom, #FFACFE, #FD5AE7);
 }
 
+#allPokemonTable td:hover {
+    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
+}
+
 /*
 #allPokemonTable tr:nth-child(odd) td {
     background-color: lightgoldenrodyellow;
