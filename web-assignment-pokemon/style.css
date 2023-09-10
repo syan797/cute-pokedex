@@ -148,6 +148,8 @@ table {
     */
     background: linear-gradient(to bottom, darkturquoise, #B99BF3);
     border: 6px solid #443A4D;
+    box-sizing: border-box;
+    flex: 1 0 375px;
 }
 
 .typeTable th, .typeTable td {
@@ -186,18 +188,30 @@ table {
 #offenseTablesContainer {
     display: flex;
     gap: 5px;
+    box-sizing: border-box;
+    border: 1px solid black;
 }
 
-@media screen and (max-width: 800px) {
+#defenseTablesContainer {
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 1000px) {
+    
+    #offenseTablesContainer {
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 900px) {
 
     body {
         grid-template-areas: "header" "pokemonInfo" "typeInfo" "sidebar" "footer";
         grid-template-rows: auto auto auto 1fr auto;
         grid-template-columns: 1fr;
-    }
-
-    #offenseTablesContainer {
-        flex-wrap: wrap;
     }
     
 }
