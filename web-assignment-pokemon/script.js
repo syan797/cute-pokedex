@@ -244,6 +244,14 @@ window.addEventListener("load", function(){
         favsContainer.innerHTML = "";
 
         let favs = getFavs();
+        
+        //changes status of clear button
+        if (favs.length > 0) {
+            clearButton.classList.add("active");
+        } else {
+            clearButton.classList.remove("active");
+        }
+
         favs.forEach((dexNum) => displayImageInFavs(dexNum));
         
         async function displayImageInFavs(dexNum) {
@@ -258,9 +266,11 @@ window.addEventListener("load", function(){
     }
 
     function clearButtonClick() {
-        const userConfirmed = window.confirm("Are you sure? You will lose all Pokemon currently in your favourites.");
-        if (userConfirmed) {
-            clearAllFavs();
+        if (clearButton.classList.contains("active")) {
+            const userConfirmed = window.confirm("Are you sure? You will lose all Pokemon currently in your favourites.");
+            if (userConfirmed) {
+                clearAllFavs();
+            }
         }
     }
 
