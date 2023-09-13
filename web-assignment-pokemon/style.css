@@ -66,6 +66,8 @@ body {
 #sidebarHeading {
     margin: 0px;
     font-size: 11pt;
+    text-shadow: 0px 0px 2px #443A4D, 0px 1px 2px #FFDF23, 0px 2px 2px #F2652B, 0px 3px 2px #FD5AE7, 0px 4px 2px #8315B2, 0px 5px 2px aquamarine;
+    padding-bottom: 5px;
 }
 
 #header {
@@ -77,8 +79,14 @@ body {
 h1 {
     font-size: 40pt;
     margin: 5px auto 25px auto; 
-    color: lightgoldenrodyellow;
     text-shadow: 0px 0px 2px #443A4D, 0px 5px 2px #FFDF23, 0px 10px 2px #F2652B, 0px 15px 2px #FD5AE7, 0px 20px 2px #8315B2, 0px 25px 2px aquamarine;
+}
+
+h2, h2 span {
+    text-shadow: 0px 0px 2px #443A4D, 0px 2px 2px #FFDF23, 0px 4px 2px #F2652B, 0px 6px 2px #FD5AE7, 0px 8px 2px #8315B2, 0px 10px 2px aquamarine;
+    /*
+    text-shadow: 0px 0px 3px #443A4D, 0px 2px 2px #FFDF23, 0px 4px 2px #FD5AE7, 0px 6px 2px aquamarine;
+    */  
 }
 
 #imageSpace {
@@ -164,9 +172,10 @@ button {
     border: 3px solid #443A4D;
 }
 
-button.active:hover {
+button.active:hover, #allPokemonTable td:hover {
     background: linear-gradient(to bottom, #F8F723, #FC2C8E);
     transform: scale(1.05);
+    transition: transform 0.1s ease;
 }
 
 #footer {
@@ -199,11 +208,14 @@ table {
     background: linear-gradient(to bottom, #FFACFE, #FD5AE7);
 }
 
-#allPokemonTable td:hover {
-    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
-}
 
 /*
+
+#allPokemonTable td:hover {
+    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
+    transform: scale(1.05);
+}
+
 #allPokemonTable tr:nth-child(odd) td {
     background-color: lightgoldenrodyellow;
     color: darkturquoise;
