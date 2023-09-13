@@ -4,8 +4,10 @@ window.addEventListener("load", function(){
     console.log(getFavs());
     let currentPokemonDexNum;
     
-    button = document.querySelector("#favButton");
-    button.addEventListener("click", buttonClick);
+    favButton = document.querySelector("#favButton");
+    clearButton = document.querySelector("#clearButton");
+    favButton.addEventListener("click", favButtonClick);
+    clearButton.addEventListener("click", clearButtonClick);
     
     displayAllPokemon();
     displayRandomPokemonDetails();
@@ -25,8 +27,11 @@ window.addEventListener("load", function(){
             //Setting up new cell with appropriate name and event listener
             let pokemon = pokemonArray[i];
             newCell.innerText = pokemon.name;
+            /*
             newCell.setAttribute("data-dex-num", pokemon.dexNumber);
             newCell.addEventListener("click", displaySpecificPokemonDetails);
+            */
+           newCell.addEventListener("click", () => displaySpecificPokemonDetails(pokemon.dexNumber));
 
             //Adding the new row & cell to the table
             pokemonTable.appendChild(newRow);
@@ -46,8 +51,14 @@ window.addEventListener("load", function(){
         displayPokemonDetails(randomPokemonObj);
     }
 
+    /*
     async function displaySpecificPokemonDetails(event) {
         let dexNum = event.target.getAttribute("data-dex-num");
+        let pokemonObj = await getSpecificPokemon(dexNum);
+        displayPokemonDetails(pokemonObj);
+    }
+    */
+    async function displaySpecificPokemonDetails(dexNum) {
         let pokemonObj = await getSpecificPokemon(dexNum);
         displayPokemonDetails(pokemonObj);
     }
@@ -65,7 +76,7 @@ window.addEventListener("load", function(){
         insertPokedexNum(currentPokemonDexNum);
         insertDescription(pokemonObj.dexEntry);
         insertTypeInfo(pokemonObj);
-        setButton();
+        setFavButton();
     }
 
     function insertName(name) {
@@ -185,21 +196,21 @@ window.addEventListener("load", function(){
         return favs;
     }
 
-    function setButton() {
-        let button = document.querySelector("#favButton");
+    function setFavButton() {
+        let favButton = document.querySelector("#favButton");
         let favs = getFavs();
 
         //check if this Pokemon is already in My Favourite Pokemon
         if (favs.includes(currentPokemonDexNum)) {
             //Button is set to remove
-            button.innerText = "Remove from My Favourite Pokemon";
+            favButton.innerText = "Remove from My Favourite Pokemon";
         } else {
             //Button is set to add
-            button.innerText = "Add to My Favourite Pokemon";
+            favButton.innerText = "Add to My Favourite Pokemon";
         }
     }
 
-    function buttonClick() {
+    function favButtonClick() {
         //check if this Pokemon is already in My Favourite Pokemon
         const favs = getFavs();
         if (favs.includes(currentPokemonDexNum)) {
@@ -214,7 +225,7 @@ window.addEventListener("load", function(){
         favs.push(currentPokemonDexNum);
         localStorage.setItem("favs", JSON.stringify(favs));
         updateFavsSection();
-        button.innerText = "Remove from My Favourite Pokemon";
+        favButton.innerText = "Remove from My Favourite Pokemon";
     }
     
     function removeFromFavs() {
@@ -225,7 +236,7 @@ window.addEventListener("load", function(){
             localStorage.setItem("favs", JSON.stringify(favs));
             updateFavsSection();
         }
-        button.innerText = "Add to My Favourite Pokemon";
+        favButton.innerText = "Add to My Favourite Pokemon";
     }
 
     function updateFavsSection() {
@@ -241,11 +252,22 @@ window.addEventListener("load", function(){
             img.src = pokemonObj.imageUrl;
             img.alt = pokemonObj.name;
             img.classList.add("fav");
+            img.addEventListener("click", () => displaySpecificPokemonDetails(pokemonObj.dexNumber));
             favsContainer.appendChild(img);
         }
-
     }
 
+    function clearButtonClick() {
+        const userConfirmed = window.confirm("Are you sure? You will lose all Pokemon currently in your favourites.");
+        if (userConfirmed) {
+            clearAllFavs();
+        }
+    }
 
+    function clearAllFavs() {
+        newFavArray = [];
+        localStorage.setItem("favs", JSON.stringify(newFavArray));
+        updateFavsSection();
+    }
 
 });
