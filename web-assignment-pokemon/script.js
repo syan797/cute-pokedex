@@ -1,8 +1,16 @@
 window.addEventListener("load", function(){
 
     // Your client-side JavaScript here
+    console.log(getFavs());
+    let currentPokemonDexNum;
+    
+    button = document.querySelector("#favButton");
+    button.addEventListener("click", buttonClick);
+    
     displayAllPokemon();
     displayRandomPokemonDetails();
+    updateFavsSection();
+    
 
     // All data from the server must be accessed via AJAX fetch requests.
     async function displayAllPokemon() {
@@ -40,17 +48,24 @@ window.addEventListener("load", function(){
 
     async function displaySpecificPokemonDetails(event) {
         let dexNum = event.target.getAttribute("data-dex-num");
-        let pokemonResponse = await fetch(`https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/${dexNum}`);
-        let pokemonObj = await pokemonResponse.json();
+        let pokemonObj = await getSpecificPokemon(dexNum);
         displayPokemonDetails(pokemonObj);
     }
 
+    async function getSpecificPokemon(dexNum) {
+        let pokemonResponse = await fetch(`https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/${dexNum}`);
+        let pokemonObj = await pokemonResponse.json();
+        return pokemonObj;
+    }
+
     function displayPokemonDetails(pokemonObj) {
+        currentPokemonDexNum = pokemonObj.dexNumber;
         insertName(pokemonObj.name);
         insertImage(pokemonObj.imageUrl, pokemonObj.name);
-        insertPokedexNum(pokemonObj.dexNumber);
+        insertPokedexNum(currentPokemonDexNum);
         insertDescription(pokemonObj.dexEntry);
         insertTypeInfo(pokemonObj);
+        setButton();
     }
 
     function insertName(name) {
@@ -84,7 +99,7 @@ window.addEventListener("load", function(){
         let typesArray = pokemonObj.types;
         insertTypesList(typesArray, typesList);
         typesArray.forEach((type) => addOffenseTable(type, offenseInfo));
-        addDefenseTable(pokemonObj.dexNumber, defenseInfo);
+        addDefenseTable(currentPokemonDexNum, defenseInfo);
     }
     
     function insertTypesList(typesArray, container) {
@@ -159,5 +174,78 @@ window.addEventListener("load", function(){
             return "Quadruple damage";
         }
     }
+
+    function getFavs() {
+        let favs = localStorage.getItem("favs");
+        if (favs !== null) {
+            favs = JSON.parse(favs);
+        } else {
+            favs = [];
+        }
+        return favs;
+    }
+
+    function setButton() {
+        let button = document.querySelector("#favButton");
+        let favs = getFavs();
+
+        //check if this Pokemon is already in My Favourite Pokemon
+        if (favs.includes(currentPokemonDexNum)) {
+            //Button is set to remove
+            button.innerText = "Remove from My Favourite Pokemon";
+        } else {
+            //Button is set to add
+            button.innerText = "Add to My Favourite Pokemon";
+        }
+    }
+
+    function buttonClick() {
+        //check if this Pokemon is already in My Favourite Pokemon
+        const favs = getFavs();
+        if (favs.includes(currentPokemonDexNum)) {
+            removeFromFavs();
+        } else {
+            addToFavs();
+        }
+    }
+    
+    function addToFavs() {
+        let favs = getFavs();
+        favs.push(currentPokemonDexNum);
+        localStorage.setItem("favs", JSON.stringify(favs));
+        updateFavsSection();
+        button.innerText = "Remove from My Favourite Pokemon";
+    }
+    
+    function removeFromFavs() {
+        let favs = getFavs();
+        const index = favs.indexOf(currentPokemonDexNum);
+        if (index !== -1) {
+            favs.splice(index, 1);
+            localStorage.setItem("favs", JSON.stringify(favs));
+            updateFavsSection();
+        }
+        button.innerText = "Add to My Favourite Pokemon";
+    }
+
+    function updateFavsSection() {
+        const favsContainer = document.querySelector("#favsContainer");
+        favsContainer.innerHTML = "";
+
+        let favs = getFavs();
+        favs.forEach((dexNum) => displayImageInFavs(dexNum));
+        
+        async function displayImageInFavs(dexNum) {
+            let pokemonObj = await getSpecificPokemon(dexNum);
+            let img = document.createElement("img");
+            img.src = pokemonObj.imageUrl;
+            img.alt = pokemonObj.name;
+            img.classList.add("fav");
+            favsContainer.appendChild(img);
+        }
+
+    }
+
+
 
 });

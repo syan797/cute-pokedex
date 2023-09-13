@@ -248,6 +248,18 @@ table {
     */
 }
 
+#favsContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fav {
+    /*
+    dgsgdsdsg
+    */
+    width: 150px;
+}
+
 @media screen and (max-width: 1230px) {
     
     #offenseTablesContainer {
