@@ -256,12 +256,20 @@ window.addEventListener("load", function(){
         
         async function displayImageInFavs(dexNum) {
             let pokemonObj = await getSpecificPokemon(dexNum);
+            let favPokemon = document.createElement("div");
+            favPokemon.classList.add("favPokemonContainer");
+            favsContainer.appendChild(favPokemon);
+
+            let bkg = document.createElement("div");
+            bkg.classList.add("pokemonBackground", "favBackground");
+            favPokemon.appendChild(bkg);
+            
             let img = document.createElement("img");
             img.src = pokemonObj.imageUrl;
             img.alt = pokemonObj.name;
             img.classList.add("fav");
             img.addEventListener("click", () => displaySpecificPokemonDetails(pokemonObj.dexNumber));
-            favsContainer.appendChild(img);
+            favPokemon.appendChild(img);
         }
     }
 
