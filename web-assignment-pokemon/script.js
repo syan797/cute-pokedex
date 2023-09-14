@@ -1,7 +1,6 @@
 window.addEventListener("load", function(){
 
     // Your client-side JavaScript here
-    console.log(getFavs());
     let currentPokemonDexNum;
     
     favButton = document.querySelector("#favButton");
@@ -287,5 +286,5 @@ window.addEventListener("load", function(){
         localStorage.setItem("favs", JSON.stringify(newFavArray));
         updateFavsSection();
     }
-
+    
 });
