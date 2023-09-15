@@ -146,6 +146,15 @@ h2, h2 span {
     
 }
 
+.favPokemonContainer.highlight {
+    transform: scale(1.1);
+    transition: transform 0.1s ease;
+}
+
+.favPokemonContainer.highlight .favBackground {
+    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
+}
+
 #image {
     position: relative;
     z-index: 2;
@@ -258,6 +267,10 @@ table {
 .typeTable td {
     padding: 10px 20px;
     background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
+}
+
+.typeTable tr:hover td {
+    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
 }
 
 /*

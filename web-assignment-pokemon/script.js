@@ -268,6 +268,8 @@ window.addEventListener("load", function(){
             img.alt = pokemonObj.name;
             img.classList.add("fav");
             img.addEventListener("click", () => displaySpecificPokemonDetails(pokemonObj.dexNumber));
+            img.addEventListener("mouseenter", () => favPokemon.classList.add("highlight"));
+            img.addEventListener("mouseleave", () => favPokemon.classList.remove("highlight"));
             favPokemon.appendChild(img);
         }
     }
