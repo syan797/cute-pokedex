@@ -215,8 +215,12 @@ button {
     border: 4px solid #443A4D;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2); 
     padding: 20px;
-    background: linear-gradient(to bottom, darkturquoise, #B99BF3);
+    background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
     font-size: 12pt;
+}
+
+button.active {
+    background: linear-gradient(to bottom, darkturquoise, #B99BF3);
 }
 
 #clearButton {

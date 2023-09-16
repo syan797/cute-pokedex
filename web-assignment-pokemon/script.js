@@ -247,11 +247,12 @@ window.addEventListener("load", function(){
         //changes status of clear button
         if (favs.length > 0) {
             clearButton.classList.add("active");
+            favs.forEach((dexNum) => displayImageInFavs(dexNum));
         } else {
             clearButton.classList.remove("active");
+            favsContainer.innerHTML = "<p>No favourites to display.</p>";
         }
 
-        favs.forEach((dexNum) => displayImageInFavs(dexNum));
         
         async function displayImageInFavs(dexNum) {
             let pokemonObj = await getSpecificPokemon(dexNum);
