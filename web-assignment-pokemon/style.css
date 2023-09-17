@@ -1,7 +1,7 @@
 :root {
     /*
     maybes
-    for lightblue
+    for lightblue for gradient: #25dde0
     darkturq
     aquarmarine
     #B1DFF8
@@ -11,9 +11,22 @@
     original one: #B99BF3
     slightly darker than original: #a079ef
     darkpurp from heading: #8315B2
+    darkpurp which worked p well: #a52ed8 , slightly lighter: #b64de3 
+    original lightpurp: #D08AFA, then tried #d192f5
     */
-    --light-blue: darkturquoise;
-    --dark-purple: #a52ed8;
+    --medium-blue: #25dde0;
+    --light-blue: rgb(134, 248, 210);
+    --dark-purple: #a079ef;
+    --main-text: #fafad2;
+    --outlines: #443A4D;
+    --box-shadows: rgba(0, 0, 0, 0.2);
+    --hot-pink: #FD5AE7;
+    --light-pink: #FFACFE;
+    --light-purple: #D08AFA;
+    --yellow: #F8F723;
+    --red: #FC2C8E;
+    --orange: #FA7468;
+
 }
 
 @font-face {
@@ -22,9 +35,9 @@
 }
 
 * {
-    color: lightgoldenrodyellow;
+    color: var(--main-text);
     font-family: "Press Start 2 P", "Courier New", Courier, monospace; 
-    text-shadow: 0px 0px 3px #443A4D;
+    text-shadow: 0px 0px 3px var(--outlines);
 }
 
 body {
@@ -51,20 +64,20 @@ body {
     padding: 10px;
     margin: 10px;
     border-radius: 40px;
-    border: 6px solid #443A4D;
-    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2); 
+    border: 6px solid var(--outlines);
+    box-shadow: 6px 6px 6px var(--box-shadows); 
 }
 
 #header, #footer {
     padding-left: 40px;
     padding-right: 40px;
     /*line-height: 0; */
-    background: linear-gradient(to bottom, #FFACFE, #FD5AE7);
+    background: linear-gradient(to bottom, var(--light-pink), var(--hot-pink));
     padding-bottom: 30px;
 }
 
 .main {
-    background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
+    background: linear-gradient(to bottom, var(--light-purple), var(--hot-pink));
     padding: 10px 30px 25px 30px;
 }
 
@@ -85,7 +98,7 @@ body {
     background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
     background: linear-gradient(to bottom, darkturquoise, #B99BF3);
     */
-    background: linear-gradient(to bottom, var(--light-blue), var(--dark-purple));
+    background: linear-gradient(to bottom, var(--medium-blue), var(--dark-purple));
     grid-area: sidebar;
     text-align: center;
     padding: 20px 0px;
@@ -94,7 +107,7 @@ body {
 #sidebarHeading {
     margin: 0px;
     font-size: 11pt;
-    text-shadow: 0px 0px 2px #443A4D, 0px 1px 2px #FFDF23, 0px 2px 2px #F2652B, 0px 3px 2px #FD5AE7, 0px 4px 2px #8315B2, 0px 5px 2px aquamarine;
+    text-shadow: 0px 0px 2px var(--outlines), 0px 1px 2px var(--yellow), 0px 2px 2px var(--orange), 0px 3px 2px var(--hot-pink), 0px 4px 2px #8315B2, 0px 5px 2px var(--light-blue);
     padding-bottom: 5px;
 }
 
@@ -107,7 +120,7 @@ body {
 h1 {
     font-size: 40pt;
     margin: 5px auto 25px auto; 
-    text-shadow: 0px 0px 2px #443A4D, 0px 5px 2px #FFDF23, 0px 10px 2px #F2652B, 0px 15px 2px #FD5AE7, 0px 20px 2px var(--dark-purple), 0px 25px 2px aquamarine;
+    text-shadow: 0px 0px 2px var(--outlines), 0px 5px 2px var(--yellow), 0px 10px 2px var(--orange), 0px 15px 2px var(--hot-pink), 0px 20px 2px var(--dark-purple), 0px 25px 2px var(--light-blue);
     /*
     original
     text-shadow: 0px 0px 2px #443A4D, 0px 5px 2px #FFDF23, 0px 10px 2px #F2652B, 0px 15px 2px #FD5AE7, 0px 20px 2px #8315B2, 0px 25px 2px aquamarine;
@@ -115,7 +128,7 @@ h1 {
 }
 
 h2, h2 span {
-    text-shadow: 0px 0px 2px #443A4D, 0px 2px 2px #FFDF23, 0px 4px 2px #F2652B, 0px 6px 2px #FD5AE7, 0px 8px 2px #8315B2, 0px 10px 2px aquamarine;
+    text-shadow: 0px 0px 2px var(--outlines), 0px 2px 2px var(--yellow), 0px 4px 2px var(--orange), 0px 6px 2px var(--hot-pink), 0px 8px 2px #8315B2, 0px 10px 2px var(--light-blue);
     /*
     text-shadow: 0px 0px 3px #443A4D, 0px 2px 2px #FFDF23, 0px 4px 2px #FD5AE7, 0px 6px 2px aquamarine;
     */ 
@@ -185,7 +198,7 @@ h2, h2 span {
     height: 0;
     padding-bottom: 100%;
     position: relative;
-    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
+    background: linear-gradient(to bottom, var(--yellow), var(--red));
     /*
     centers the element within parent
     top: 50%;
@@ -208,7 +221,7 @@ h2, h2 span {
     */
     width: 80%;
     padding-bottom: 80%;
-    background: linear-gradient(to bottom, var(--light-blue) 10%, var(--dark-purple) 90%);
+    background: linear-gradient(to bottom, var(--medium-blue) 10%, var(--dark-purple) 90%);
     
 }
 
@@ -218,7 +231,7 @@ h2, h2 span {
 }
 
 .favPokemonContainer.highlight .favBackground {
-    background: linear-gradient(to bottom, #F8F723 10%, #FC2C8E 90%);
+    background: linear-gradient(to bottom, var(--yellow) 10%, var(--red) 90%);
 }
 
 #image {
@@ -298,27 +311,26 @@ h2, h2 span {
 }
 
 button {
-    color: lightgoldenrodyellow;
     border-radius: 40px;
-    border: 4px solid #443A4D;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2); 
+    border: 4px solid var(--outlines);
+    box-shadow: 4px 4px 4px var(--box-shadows); 
     padding: 20px;
-    background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
+    background: linear-gradient(to bottom, var(--light-purple), var(--hot-pink));
     font-size: 12pt;
 }
 
 button.active {
-    background: linear-gradient(to bottom, darkturquoise, #B99BF3);
+    background: linear-gradient(to bottom, var(--medium-blue), var(--dark-purple));
 }
 
 #clearButton {
     font-size: 10pt;
     padding: 10px 20px;
-    border: 3px solid #443A4D;
+    border: 3px solid var(--outlines);
 }
 
 button.active:hover, #allPokemonTable td:hover {
-    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
+    background: linear-gradient(to bottom, var(--yellow), var(--red));
     transform: scale(1.05);
     transition: transform 0.1s ease;
 }
@@ -348,9 +360,9 @@ table {
     */
     padding: 5px 20px;
     border-radius: 40px;
-    border: 3px solid #443A4D;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to bottom, #FFACFE, #FD5AE7);
+    border: 3px solid var(--outlines);
+    box-shadow: 4px 4px 4px var(--box-shadows);
+    background: linear-gradient(to bottom, var(--light-pink), var(--hot-pink));
 }
 
 
@@ -377,32 +389,31 @@ table {
     /*
     background-color: #FECAB2; 
     */
-    background: linear-gradient(to bottom, var(--light-blue), var(--dark-purple));
-    border: 6px solid #443A4D;
+    background: linear-gradient(to bottom, var(--medium-blue), var(--dark-purple));
+    border: 6px solid var(--outlines);
     box-sizing: border-box;
     flex: 1 0 375px;
     max-width: 700px;
 }
 
 .typeTable th, .typeTable td {
-    color: lightgoldenrodyellow;
     border-radius: 40px;
-    border: 3px solid #443A4D;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2); 
+    border: 3px solid var(--outlines);
+    box-shadow: 4px 4px 4px var(--box-shadows); 
 }
 
 .typeTable th {
-    background: linear-gradient(to bottom, #FFACFE, #FD5AE7);
+    background: linear-gradient(to bottom, var(--light-pink), var(--hot-pink));
     padding: 20px;
 }
 
 .typeTable td {
     padding: 10px 20px;
-    background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
+    background: linear-gradient(to bottom, var(--light-purple), var(--hot-pink));
 }
 
 .typeTable tr:hover td {
-    background: linear-gradient(to bottom, #F8F723, #FC2C8E);
+    background: linear-gradient(to bottom, var(--yellow), var(--red));
 }
 
 /*
