@@ -326,7 +326,7 @@ window.addEventListener("load", function(){
             let img = document.createElement("img");
             img.src = pokemonObj.imageUrl;
             img.alt = pokemonObj.name;
-            img.classList.add("fav");
+            img.classList.add("favImage");
             img.addEventListener("click", () => displayPokemon(pokemonObj.dexNumber));
             img.addEventListener("mouseenter", () => favPokemon.classList.add("highlight"));
             img.addEventListener("mouseleave", () => favPokemon.classList.remove("highlight"));
