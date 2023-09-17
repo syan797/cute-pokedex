@@ -190,91 +190,6 @@ h2, h2 span {
     background: linear-gradient(to bottom, var(--yellow) 10%, var(--red) 90%);
 }
 
-/* Loading & error styles */
-
-#loadingText, #errorText {
-    font-size: 9pt;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: inline-block;
-    z-index: 2;
-}
-
-#loadingText span {
-    display: inline-block;
-    animation: appear 2s linear infinite;
-    animation-delay: calc(0.5s * var(--index));
-    
-    /*
-    animation-name: appear;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    
-    */
-}
-
-#loadingText span:nth-child(1) {
-    --index: 1;
-}
-
-#loadingText span:nth-child(2) {
-    --index: 2;
-}
-
-#loadingText span:nth-child(3) {
-    --index: 3;
-}
-
-@keyframes appear {
-    16% {
-        transform: translateY(-5px);
-    }
-    33% {
-        transform: translate(0px);
-    }
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* Button styles */
-
-#favButtonContainer {
-    text-align: center;
-}
-
-#clearButtonContainer {
-    text-align: right;
-}
-
-button {
-    border-radius: 40px;
-    border: 4px solid var(--outlines);
-    box-shadow: 4px 4px 4px var(--box-shadows); 
-    padding: 20px;
-    background: linear-gradient(to bottom, var(--light-purple), var(--hot-pink));
-    font-size: 12pt;
-}
-
-button.active {
-    background: linear-gradient(to bottom, var(--medium-blue), var(--dark-purple));
-}
-
-#clearButton {
-    font-size: 10pt;
-    padding: 10px 20px;
-    border: 3px solid var(--outlines);
-}
-
-button.active:hover, #allPokemonTable td:hover {
-    background: linear-gradient(to bottom, var(--yellow), var(--red));
-    transform: scale(1.05);
-    transition: transform 0.1s ease;
-}
-
 /* Table styles */
 
 table {
@@ -386,6 +301,92 @@ table {
     border: 1px solid black;
     */
 }
+
+/* Button styles */
+
+#favButtonContainer {
+    text-align: center;
+}
+
+#clearButtonContainer {
+    text-align: right;
+}
+
+button {
+    border-radius: 40px;
+    border: 4px solid var(--outlines);
+    box-shadow: 4px 4px 4px var(--box-shadows); 
+    padding: 20px;
+    background: linear-gradient(to bottom, var(--light-purple), var(--hot-pink));
+    font-size: 12pt;
+}
+
+button.active {
+    background: linear-gradient(to bottom, var(--medium-blue), var(--dark-purple));
+}
+
+#clearButton {
+    font-size: 10pt;
+    padding: 10px 20px;
+    border: 3px solid var(--outlines);
+}
+
+button.active:hover, #allPokemonTable td:hover {
+    background: linear-gradient(to bottom, var(--yellow), var(--red));
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
+}
+
+/* Loading & error styles */
+
+#loadingText, #errorText {
+    font-size: 9pt;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    z-index: 2;
+}
+
+#loadingText span {
+    display: inline-block;
+    animation: appear 2s linear infinite;
+    animation-delay: calc(0.5s * var(--index));
+    
+    /*
+    animation-name: appear;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    
+    */
+}
+
+#loadingText span:nth-child(1) {
+    --index: 1;
+}
+
+#loadingText span:nth-child(2) {
+    --index: 2;
+}
+
+#loadingText span:nth-child(3) {
+    --index: 3;
+}
+
+@keyframes appear {
+    16% {
+        transform: translateY(-5px);
+    }
+    33% {
+        transform: translate(0px);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
 
 /* Media queries */
 
