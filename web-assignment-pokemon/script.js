@@ -67,9 +67,7 @@ window.addEventListener("load", function(){
         showLoading();
         let pokemonObj;
         try {
-            console.log(dexNum);
             pokemonObj = await getPokemon(dexNum);
-            console.log(pokemonObj);
         } catch (error) {
             console.error("Error:", error);
             showError();
