@@ -71,8 +71,14 @@ window.addEventListener("load", function(){
         } catch (error) {
             console.error("Error:", error);
             showError();
+            disableButtons();
         }
         displayPokemonDetails(pokemonObj);
+    }
+    
+    function disableButtons() {
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach((button) => button.classList.remove("active"));
     }
 
     /*
@@ -104,7 +110,7 @@ window.addEventListener("load", function(){
 
     function showLoading() {
         document.querySelector("#image").classList.add("hidden");
-        document.querySelector("#loadingBox").classList.remove("hidden");
+        document.querySelector("#loadingText").classList.remove("hidden");
     }
 
     function showError() {
@@ -112,11 +118,10 @@ window.addEventListener("load", function(){
         document.querySelector("#errorText").classList.remove("hidden");
     }
 
-    function hideLoadingBox() {
+    function hideLoading() {
         document.querySelector("#image").classList.remove("hidden");
-        document.querySelector("#loadingText").classList.remove("hidden");
+        document.querySelector("#loadingText").classList.add("hidden");
         document.querySelector("#errorText").classList.add("hidden");
-        document.querySelector("#loadingBox").classList.add("hidden");
     }
 
     function displayPokemonDetails(pokemonObj) {
@@ -137,7 +142,7 @@ window.addEventListener("load", function(){
     }
 
     function insertImage(url, name) {
-        hideLoadingBox();
+        hideLoading();
         let image = document.querySelector("#image");
         image.src = url;
         image.alt = name;
@@ -261,13 +266,15 @@ window.addEventListener("load", function(){
         }
     }
 
-    function favButtonClick() {
-        //check if this Pokemon is already in My Favourite Pokemon
-        const favs = getFavs();
-        if (favs.includes(currentPokemonDexNum)) {
-            removeFromFavs();
-        } else {
-            addToFavs();
+    function favButtonClick(event) {
+        if (event.target.classList.contains("active")) {
+            //check if this Pokemon is already in My Favourite Pokemon
+            const favs = getFavs();
+            if (favs.includes(currentPokemonDexNum)) {
+                removeFromFavs();
+            } else {
+                addToFavs();
+            }
         }
     }
     

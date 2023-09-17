@@ -206,7 +206,7 @@ h2, h2 span {
 .favPokemonContainer.highlight .favBackground {
     background: linear-gradient(to bottom, var(--yellow) 10%, var(--red) 90%);
 }
-
+/*
 #loadingBox {
     position: relative;
     z-index: 3;
@@ -214,6 +214,7 @@ h2, h2 span {
     height: 0;
     padding-bottom: 100%;
 }
+*/
 
 #loadingText, #errorText {
     font-size: 9pt;
@@ -222,6 +223,7 @@ h2, h2 span {
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
+    z-index: 2;
 }
 
 #loadingText span {
