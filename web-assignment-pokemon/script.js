@@ -1,21 +1,21 @@
 window.addEventListener("load", function(){
 
     // Your client-side JavaScript here
+    // All data from the server must be accessed via AJAX fetch requests.
+    
+    // This variable stores the dexNumber of the currently displayed Pokemon.
     let currentPokemonDexNum;
 
-    favButton = document.querySelector("#favButton");
-    clearButton = document.querySelector("#clearButton");
-    favButton.addEventListener("click", favButtonClick);
-    clearButton.addEventListener("click", clearButtonClick);
-    
-    displayAllPokemon();
-    //displayRandomPokemonDetails();
+    setupButtons();
+    loadSidebar();
     displayPokemon("random");
     updateFavsSection();
-    
 
-    // All data from the server must be accessed via AJAX fetch requests.
-    async function displayAllPokemon() {
+    /* 
+    Functions for loading the sidebar:
+    */
+   
+    async function loadSidebar() {
         let pokemonArray = await getPokemonArray();
         let pokemonTable = document.querySelector("#allPokemonTable");
         
@@ -131,7 +131,7 @@ window.addEventListener("load", function(){
         insertPokedexNum(currentPokemonDexNum);
         insertDescription(pokemonObj.dexEntry);
         insertTypeInfo(pokemonObj);
-        setFavButton();
+        updateFavButton();
     }
 
     function insertName(name) {
@@ -252,7 +252,14 @@ window.addEventListener("load", function(){
         return favs;
     }
 
-    function setFavButton() {
+    function setupButtons() {
+        favButton = document.querySelector("#favButton");
+        clearButton = document.querySelector("#clearButton");
+        favButton.addEventListener("click", favButtonClick);
+        clearButton.addEventListener("click", clearButtonClick);
+    }
+
+    function updateFavButton() {
         let favButton = document.querySelector("#favButton");
         let favs = getFavs();
 
@@ -283,7 +290,8 @@ window.addEventListener("load", function(){
         favs.push(currentPokemonDexNum);
         localStorage.setItem("favs", JSON.stringify(favs));
         updateFavsSection();
-        favButton.innerText = "Remove from My Favourite Pokemon";
+        updateFavButton();
+        //favButton.innerText = "Remove from My Favourite Pokemon";
     }
     
     function removeFromFavs() {
@@ -294,7 +302,8 @@ window.addEventListener("load", function(){
             localStorage.setItem("favs", JSON.stringify(favs));
             updateFavsSection();
         }
-        favButton.innerText = "Add to My Favourite Pokemon";
+        updateFavButton();
+        //favButton.innerText = "Add to My Favourite Pokemon";
     }
 
     function updateFavsSection() {
