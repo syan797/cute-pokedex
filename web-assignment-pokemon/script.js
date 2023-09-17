@@ -2,14 +2,15 @@ window.addEventListener("load", function(){
 
     // Your client-side JavaScript here
     let currentPokemonDexNum;
-    
+
     favButton = document.querySelector("#favButton");
     clearButton = document.querySelector("#clearButton");
     favButton.addEventListener("click", favButtonClick);
     clearButton.addEventListener("click", clearButtonClick);
     
     displayAllPokemon();
-    displayRandomPokemonDetails();
+    //displayRandomPokemonDetails();
+    displayPokemon("random");
     updateFavsSection();
     
 
@@ -30,7 +31,7 @@ window.addEventListener("load", function(){
             newCell.setAttribute("data-dex-num", pokemon.dexNumber);
             newCell.addEventListener("click", displaySpecificPokemonDetails);
             */
-           newCell.addEventListener("click", () => displaySpecificPokemonDetails(pokemon.dexNumber));
+            newCell.addEventListener("click", () => displayPokemon(pokemon.dexNumber));
 
             //Adding the new row & cell to the table
             pokemonTable.appendChild(newRow);
@@ -44,11 +45,15 @@ window.addEventListener("load", function(){
         return allPokemonArray;
     }
 
+    /*
     async function displayRandomPokemonDetails() {
         let randomPokemonResponse = await fetch("https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/random");
         let randomPokemonObj = await randomPokemonResponse.json();
         displayPokemonDetails(randomPokemonObj);
+        let randomPokemonObj = await fetchPokemonObj("https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/random");
+        displayPokemonDetails(randomPokemonObj);
     }
+    */
 
     /*
     async function displaySpecificPokemonDetails(event) {
@@ -57,15 +62,63 @@ window.addEventListener("load", function(){
         displayPokemonDetails(pokemonObj);
     }
     */
+
+    async function displayPokemon(dexNum) {
+        showLoading();
+        let pokemonObj;
+        try {
+            console.log(dexNum);
+            pokemonObj = await getPokemon(dexNum);
+            console.log(pokemonObj);
+        } catch (error) {
+            console.error("Error:", error);
+            showError();
+        }
+        displayPokemonDetails(pokemonObj);
+    }
+
+    /*
     async function displaySpecificPokemonDetails(dexNum) {
         let pokemonObj = await getSpecificPokemon(dexNum);
         displayPokemonDetails(pokemonObj);
     }
+    */
 
-    async function getSpecificPokemon(dexNum) {
+    async function getPokemon(dexNum) {
         let pokemonResponse = await fetch(`https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/${dexNum}`);
         let pokemonObj = await pokemonResponse.json();
         return pokemonObj;
+    }
+    
+    /*
+    async function fetchPokemonObj(link) {
+        showLoading();
+        try {
+            let pokemonResponse = await fetch(link);
+            let pokemonObj = await pokemonResponse.json();
+            return pokemonObj;
+        } catch (error) {
+            console.error("Error:", error);
+            showError();
+        }
+    }
+    */
+
+    function showLoading() {
+        document.querySelector("#image").classList.add("hidden");
+        document.querySelector("#loadingBox").classList.remove("hidden");
+    }
+
+    function showError() {
+        document.querySelector("#loadingText").classList.add("hidden");
+        document.querySelector("#errorText").classList.remove("hidden");
+    }
+
+    function hideLoadingBox() {
+        document.querySelector("#image").classList.remove("hidden");
+        document.querySelector("#loadingText").classList.remove("hidden");
+        document.querySelector("#errorText").classList.add("hidden");
+        document.querySelector("#loadingBox").classList.add("hidden");
     }
 
     function displayPokemonDetails(pokemonObj) {
@@ -86,6 +139,7 @@ window.addEventListener("load", function(){
     }
 
     function insertImage(url, name) {
+        hideLoadingBox();
         let image = document.querySelector("#image");
         image.src = url;
         image.alt = name;
@@ -255,7 +309,7 @@ window.addEventListener("load", function(){
 
         
         async function displayImageInFavs(dexNum) {
-            let pokemonObj = await getSpecificPokemon(dexNum);
+            let pokemonObj = await getPokemon(dexNum);
             let favPokemon = document.createElement("div");
             favPokemon.classList.add("favPokemonContainer");
             favsContainer.appendChild(favPokemon);
@@ -268,7 +322,7 @@ window.addEventListener("load", function(){
             img.src = pokemonObj.imageUrl;
             img.alt = pokemonObj.name;
             img.classList.add("fav");
-            img.addEventListener("click", () => displaySpecificPokemonDetails(pokemonObj.dexNumber));
+            img.addEventListener("click", () => displayPokemon(pokemonObj.dexNumber));
             img.addEventListener("mouseenter", () => favPokemon.classList.add("highlight"));
             img.addEventListener("mouseleave", () => favPokemon.classList.remove("highlight"));
             favPokemon.appendChild(img);
@@ -289,5 +343,5 @@ window.addEventListener("load", function(){
         localStorage.setItem("favs", JSON.stringify(newFavArray));
         updateFavsSection();
     }
-    
+
 });
