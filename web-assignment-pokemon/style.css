@@ -1,32 +1,16 @@
 :root {
-    /*
-    maybes
-    for lightblue for gradient: #25dde0
-    darkturq
-    aquarmarine
-    #B1DFF8
-    for dark purp
-    #6A93F2
-    #683CB8
-    original one: #B99BF3
-    slightly darker than original: #a079ef
-    darkpurp from heading: #8315B2
-    darkpurp which worked p well: #a52ed8 , slightly lighter: #b64de3 
-    original lightpurp: #D08AFA, then tried #d192f5
-    */
-    --medium-blue: #25dde0;
-    --light-blue: rgb(134, 248, 210);
-    --dark-purple: #a079ef;
     --main-text: #fafad2;
-    --outlines: #443A4D;
+    --outlines: #443a4d;
     --box-shadows: rgba(0, 0, 0, 0.2);
-    --hot-pink: #FD5AE7;
-    --light-pink: #FFACFE;
-    --light-purple: #D08AFA;
-    --yellow: #F8F723;
-    --red: #FC2C8E;
-    --orange: #FA7468;
-
+    --red: #fc2c8e;
+    --orange: #fa7468;
+    --yellow: #f8f723;
+    --light-blue: #86f8d2;
+    --medium-blue: #25dde0;
+    --light-purple: #d08afa;
+    --dark-purple: #a079ef;
+    --light-pink: #ffacfe;
+    --hot-pink: #fd5ae7;
 }
 
 @font-face {
@@ -35,33 +19,32 @@
 }
 
 * {
-    color: var(--main-text);
     font-family: "Press Start 2 P", "Courier New", Courier, monospace; 
+    color: var(--main-text);
     text-shadow: 0px 0px 3px var(--outlines);
 }
 
 body {
     margin: 0px;
     padding: 20px;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    
     display: grid;
     grid-template-areas: "header header" "sidebar pokemonInfo" "sidebar typeInfo" "sidebar favs" "sidebar ." "footer footer";
     grid-template-rows: auto auto auto auto 1fr auto;
     grid-template-columns: auto 1fr;
-    min-height: 100vh;
+        
     background-image: url("./assets/images/pokemon-art.webp");
     background-size: cover;
     background-position: center center;
-    width: 100%;
-    height: 100%;
     background-attachment: fixed;
-    box-sizing: border-box;
-    /*
-    background: linear-gradient(to bottom, #B1A2FF, #FFACFE);
-    */
 }
 
+/* Panel styles */
+
 .panel {
-    padding: 10px;
     margin: 10px;
     border-radius: 40px;
     border: 6px solid var(--outlines);
@@ -69,16 +52,22 @@ body {
 }
 
 #header, #footer {
-    padding-left: 40px;
-    padding-right: 40px;
-    /*line-height: 0; */
     background: linear-gradient(to bottom, var(--light-pink), var(--hot-pink));
-    padding-bottom: 30px;
+}
+
+#header {
+    padding: 15px 40px;
+    grid-area: header;
+}
+
+#footer {
+    padding: 10px 40px 30px 40px;
+    grid-area: footer;
 }
 
 .main {
-    background: linear-gradient(to bottom, var(--light-purple), var(--hot-pink));
     padding: 10px 30px 25px 30px;
+    background: linear-gradient(to bottom, var(--light-purple), var(--hot-pink));
 }
 
 #pokemonInfo {
@@ -94,92 +83,48 @@ body {
 }
 
 #sidebar {
-    /*
-    background: linear-gradient(to bottom, #D08AFA, #FD5AE7);
-    background: linear-gradient(to bottom, darkturquoise, #B99BF3);
-    */
-    background: linear-gradient(to bottom, var(--medium-blue), var(--dark-purple));
-    grid-area: sidebar;
-    text-align: center;
     padding: 20px 0px;
+    grid-area: sidebar;
+    background: linear-gradient(to bottom, var(--medium-blue), var(--dark-purple));
+    text-align: center;
 }
 
-#sidebarHeading {
-    margin: 0px;
-    font-size: 11pt;
-    text-shadow: 0px 0px 2px var(--outlines), 0px 1px 2px var(--yellow), 0px 2px 2px var(--orange), 0px 3px 2px var(--hot-pink), 0px 4px 2px #8315B2, 0px 5px 2px var(--light-blue);
-    padding-bottom: 5px;
-}
-
-#header {
-    grid-area: header;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
+/* Heading styles */
 
 h1 {
-    font-size: 40pt;
     margin: 5px auto 25px auto; 
+    font-size: 40pt;
     text-shadow: 0px 0px 2px var(--outlines), 0px 5px 2px var(--yellow), 0px 10px 2px var(--orange), 0px 15px 2px var(--hot-pink), 0px 20px 2px var(--dark-purple), 0px 25px 2px var(--light-blue);
-    /*
-    original
-    text-shadow: 0px 0px 2px #443A4D, 0px 5px 2px #FFDF23, 0px 10px 2px #F2652B, 0px 15px 2px #FD5AE7, 0px 20px 2px #8315B2, 0px 25px 2px aquamarine;
-    */
 }
 
 h2, h2 span {
-    text-shadow: 0px 0px 2px var(--outlines), 0px 2px 2px var(--yellow), 0px 4px 2px var(--orange), 0px 6px 2px var(--hot-pink), 0px 8px 2px #8315B2, 0px 10px 2px var(--light-blue);
-    /*
-    text-shadow: 0px 0px 3px #443A4D, 0px 2px 2px #FFDF23, 0px 4px 2px #FD5AE7, 0px 6px 2px aquamarine;
-    */ 
+    text-shadow: 0px 0px 2px var(--outlines), 0px 2px 2px var(--yellow), 0px 4px 2px var(--orange), 0px 6px 2px var(--hot-pink), 0px 8px 2px var(--dark-purple), 0px 10px 2px var(--light-blue);
 }
 
 #typeInfoHeading {
     padding-bottom: 10px;
 }
 
+#sidebarHeading {
+    margin: 0px;
+    padding-bottom: 5px;
+    font-size: 11pt;
+    text-shadow: 0px 0px 2px var(--outlines), 0px 1px 2px var(--yellow), 0px 2px 2px var(--orange), 0px 3px 2px var(--hot-pink), 0px 4px 2px var(--dark-purple), 0px 5px 2px var(--light-blue);
+}
+
+/* Image styles */
+
 #imageSpace {
     padding: 20px 0px;
     text-align: center;
-    
-    /*
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    */
 }
 
 #imageContainer {
+    display: inline-block;
     position: relative;
     width: 60%;
     max-width: 512px;
-    display: inline-block;
     box-sizing: border-box;
-    
-    
-    
-    /*
-    display: flex;
-    justify-content: center;
-    padding-bottom: 60%;
-    max-height: 512px;
-    height: 0;
-    */
-}
-
-
-.favPokemonContainer {
-    position: relative;
-    width: 20%;
-    min-width: 150px;
-    text-align: center;
-    padding: 2% 0px;
-    box-sizing: border-box;
-    min-height: 150px;
-    /*
-    height: 125%;
-    width: 150px;
-    */
 }
 
 .pokemonBackground {
@@ -211,6 +156,34 @@ h2, h2 span {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 63%, 100% 63%, 100% 61%, 0% 61%, 0% 59%, 100% 59%, 100% 57%, 0% 57%, 0% 55%, 100% 55%, 100% 53%, 0% 53%, 0% 51%, 100% 51%, 100% 49%, 0% 49%, 0% 47%, 100% 47%, 100% 45%, 0% 45%);
 }
 
+#image {
+    position: absolute;
+    /*
+    centers the element within parent
+    */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    z-index: 2;
+    width: 100%;
+}
+
+.favPokemonContainer {
+    position: relative;
+    width: 20%;
+    min-width: 150px;
+    text-align: center;
+    padding: 2% 0px;
+    box-sizing: border-box;
+    min-height: 150px;
+    /*
+    height: 125%;
+    width: 150px;
+    */
+}
+
+
 .favBackground {
     /*
     some stuff here
@@ -232,19 +205,6 @@ h2, h2 span {
 
 .favPokemonContainer.highlight .favBackground {
     background: linear-gradient(to bottom, var(--yellow) 10%, var(--red) 90%);
-}
-
-#image {
-    position: absolute;
-    /*
-    centers the element within parent
-    */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    z-index: 2;
-    width: 100%;
 }
 
 #loadingBox {
@@ -335,9 +295,6 @@ button.active:hover, #allPokemonTable td:hover {
     transition: transform 0.1s ease;
 }
 
-#footer {
-    grid-area: footer;
-}
 
 table {
     border-spacing: 12px;
