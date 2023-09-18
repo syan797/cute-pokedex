@@ -12,9 +12,65 @@ window.addEventListener("load", function(){
     updateFavsSection();
 
     /* 
+    Functions for controlling the buttons:
+    */
+
+    //Adds event listeners to buttons
+    function setupButtons() {
+        favButton = document.querySelector("#favButton");
+        clearButton = document.querySelector("#clearButton");
+        favButton.addEventListener("click", favButtonClick);
+        clearButton.addEventListener("click", clearButtonClick);
+    }
+
+    //Disables all buttons
+    function disableButtons() {
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach((button) => button.classList.remove("active"));
+    }
+
+    //Changes the main panel button to "Add" or "Remove"
+    // depending on whether the current Pokemon is in the favourites list
+    function updateFavButton() {
+        let favButton = document.querySelector("#favButton");
+        let favs = getFavs();
+
+        if (favs.includes(currentPokemonDexNum)) {
+            favButton.innerText = "Remove from My Favourite Pokemon";
+        } else {
+            favButton.innerText = "Add to My Favourite Pokemon";
+        }
+    }
+
+    //Event handler for favButton:
+    // Adds or removes the current Pokemon to/from the Favourites list
+    function favButtonClick(event) {
+        if (event.target.classList.contains("active")) {
+            const favs = getFavs();
+            if (favs.includes(currentPokemonDexNum)) {
+                removeFromFavs();
+            } else {
+                addToFavs();
+            }
+        }
+    }
+
+    //Event handler for clearButton:
+    // User is asked to confirm that they want to clear their Favourites list
+    function clearButtonClick() {
+        if (clearButton.classList.contains("active")) {
+            const userConfirmed = window.confirm("Are you sure? You will lose all Pokemon currently in your favourites.");
+            if (userConfirmed) {
+                clearAllFavs();
+            }
+        }
+    }
+
+    /* 
     Functions for loading the sidebar:
     */
-   
+
+    //Fills the table in the sidebar with all available Pokemon
     async function loadSidebar() {
         let pokemonArray = await getPokemonArray();
         let pokemonTable = document.querySelector("#allPokemonTable");
@@ -27,10 +83,6 @@ window.addEventListener("load", function(){
             //Setting up new cell with appropriate name and event listener
             let pokemon = pokemonArray[i];
             newCell.innerText = pokemon.name;
-            /*
-            newCell.setAttribute("data-dex-num", pokemon.dexNumber);
-            newCell.addEventListener("click", displaySpecificPokemonDetails);
-            */
             newCell.addEventListener("click", () => displayPokemon(pokemon.dexNumber));
 
             //Adding the new row & cell to the table
@@ -39,93 +91,51 @@ window.addEventListener("load", function(){
         }
     }
 
+    //Retrieves array of all Pokemon from server
     async function getPokemonArray() {
         let allPokemonResponse = await fetch("https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon");
         let allPokemonArray = await allPokemonResponse.json();
         return allPokemonArray;
     }
 
-    /*
-    async function displayRandomPokemonDetails() {
-        let randomPokemonResponse = await fetch("https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/random");
-        let randomPokemonObj = await randomPokemonResponse.json();
-        displayPokemonDetails(randomPokemonObj);
-        let randomPokemonObj = await fetchPokemonObj("https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/random");
-        displayPokemonDetails(randomPokemonObj);
-    }
+    /* 
+    Functions for loading Pokemon:
     */
 
-    /*
-    async function displaySpecificPokemonDetails(event) {
-        let dexNum = event.target.getAttribute("data-dex-num");
-        let pokemonObj = await getSpecificPokemon(dexNum);
-        displayPokemonDetails(pokemonObj);
-    }
-    */
-
+    //Shows loading screen, retrieves information for selected Pokemon
+    // and displays it on the page
     async function displayPokemon(dexNum) {
+        //Displaying the loading screen while information is being retrieved
         showLoading();
+
+        //Retrieving the information for the selected Pokemon
         let pokemonObj;
         try {
             pokemonObj = await getPokemon(dexNum);
         } catch (error) {
+            //Handling errors if any
             console.error("Error:", error);
             showError();
             disableButtons();
         }
+
+        //Displaying retrieved information
         displayPokemonDetails(pokemonObj);
     }
-    
-    function disableButtons() {
-        const buttons = document.querySelectorAll("button");
-        buttons.forEach((button) => button.classList.remove("active"));
-    }
 
-    /*
-    async function displaySpecificPokemonDetails(dexNum) {
-        let pokemonObj = await getSpecificPokemon(dexNum);
-        displayPokemonDetails(pokemonObj);
-    }
-    */
-
+    //Retrieves information for selected Pokemon from server
     async function getPokemon(dexNum) {
         let pokemonResponse = await fetch(`https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/${dexNum}`);
         let pokemonObj = await pokemonResponse.json();
         return pokemonObj;
     }
-    
-    /*
-    async function fetchPokemonObj(link) {
-        showLoading();
-        try {
-            let pokemonResponse = await fetch(link);
-            let pokemonObj = await pokemonResponse.json();
-            return pokemonObj;
-        } catch (error) {
-            console.error("Error:", error);
-            showError();
-        }
-    }
-    */
 
-    function showLoading() {
-        document.querySelector("#image").classList.add("hidden");
-        document.querySelector("#loadingText").classList.remove("hidden");
-    }
-
-    function showError() {
-        document.querySelector("#loadingText").classList.add("hidden");
-        document.querySelector("#errorText").classList.remove("hidden");
-    }
-
-    function hideLoading() {
-        document.querySelector("#image").classList.remove("hidden");
-        document.querySelector("#loadingText").classList.add("hidden");
-        document.querySelector("#errorText").classList.add("hidden");
-    }
-
+    //Given a Pokemon object, displays details onto the page
     function displayPokemonDetails(pokemonObj) {
+        //Storing the Pokemon's dexNumber into the currentPokemonDexNum variable
         currentPokemonDexNum = pokemonObj.dexNumber;
+
+        //Updating information in main details panel & type info panel
         insertName(pokemonObj.name);
         insertImage(pokemonObj.imageUrl, pokemonObj.name);
         insertPokedexNum(currentPokemonDexNum);
@@ -133,6 +143,10 @@ window.addEventListener("load", function(){
         insertTypeInfo(pokemonObj);
         updateFavButton();
     }
+
+    /* 
+    Functions for displaying main Pokemon details:
+    */
 
     function insertName(name) {
         let nameArray = document.querySelectorAll(".pokemonName");
@@ -157,6 +171,10 @@ window.addEventListener("load", function(){
         let descripBox = document.querySelector("#description");
         descripBox.innerText = description;
     }
+
+    /* 
+    Functions for displaying Pokemon type info:
+    */
 
     function insertTypeInfo(pokemonObj) {
         let typesList = getAndClearContainer("#typesList");
@@ -242,6 +260,30 @@ window.addEventListener("load", function(){
         }
     }
 
+    /* 
+    Functions for displaying loading or errors:
+    */
+
+    function showLoading() {
+        document.querySelector("#image").classList.add("hidden");
+        document.querySelector("#loadingText").classList.remove("hidden");
+    }
+
+    function showError() {
+        document.querySelector("#loadingText").classList.add("hidden");
+        document.querySelector("#errorText").classList.remove("hidden");
+    }
+
+    function hideLoading() {
+        document.querySelector("#image").classList.remove("hidden");
+        document.querySelector("#loadingText").classList.add("hidden");
+        document.querySelector("#errorText").classList.add("hidden");
+    }
+
+    /* 
+    Functions for favourites section:
+    */
+    
     function getFavs() {
         let favs = localStorage.getItem("favs");
         if (favs !== null) {
@@ -252,39 +294,6 @@ window.addEventListener("load", function(){
         return favs;
     }
 
-    function setupButtons() {
-        favButton = document.querySelector("#favButton");
-        clearButton = document.querySelector("#clearButton");
-        favButton.addEventListener("click", favButtonClick);
-        clearButton.addEventListener("click", clearButtonClick);
-    }
-
-    function updateFavButton() {
-        let favButton = document.querySelector("#favButton");
-        let favs = getFavs();
-
-        //check if this Pokemon is already in My Favourite Pokemon
-        if (favs.includes(currentPokemonDexNum)) {
-            //Button is set to remove
-            favButton.innerText = "Remove from My Favourite Pokemon";
-        } else {
-            //Button is set to add
-            favButton.innerText = "Add to My Favourite Pokemon";
-        }
-    }
-
-    function favButtonClick(event) {
-        if (event.target.classList.contains("active")) {
-            //check if this Pokemon is already in My Favourite Pokemon
-            const favs = getFavs();
-            if (favs.includes(currentPokemonDexNum)) {
-                removeFromFavs();
-            } else {
-                addToFavs();
-            }
-        }
-    }
-    
     function addToFavs() {
         let favs = getFavs();
         favs.push(currentPokemonDexNum);
@@ -340,15 +349,6 @@ window.addEventListener("load", function(){
             img.addEventListener("mouseenter", () => favPokemon.classList.add("highlight"));
             img.addEventListener("mouseleave", () => favPokemon.classList.remove("highlight"));
             favPokemon.appendChild(img);
-        }
-    }
-
-    function clearButtonClick() {
-        if (clearButton.classList.contains("active")) {
-            const userConfirmed = window.confirm("Are you sure? You will lose all Pokemon currently in your favourites.");
-            if (userConfirmed) {
-                clearAllFavs();
-            }
         }
     }
 
