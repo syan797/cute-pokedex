@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>CS719 Assignment One</title>
-        <link rel="stylesheet" href="./style.css">
-        <script src="./script.js"></script>
-    </head>
 
-    <body>
+<head>
+    <meta charset="utf-8">
+    <title>CS719 Assignment One</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
+</head>
 
-        <div id="header" class="panel">
-            <h1>Pokemon Data Viewer</h1>
-        </div>
+<body>
 
-        <div id="pokemonInfo" class="panel main">
-            <h2>Pokemon Details For <span class="pokemonName"></span></h2>
-            <div id="imageSpace">
-                <div id="imageContainer">
-                    <div id="imageBackground" class="pokemonBackground">
-                    </div>
-                    <img src="" alt="" id="image">
-                    <p id="loadingText" class="hidden">Loading<span>.</span><span>.</span><span>.</span></p>
-                    <p id="errorText" class="hidden">Error</p>
+    <div id="header" class="panel">
+        <h1>Pokemon Data Viewer</h1>
+    </div>
+
+    <div id="pokemonInfo" class="panel main">
+        <h2>Pokemon Details For <span class="pokemonName"></span></h2>
+        <div id="imageSpace">
+            <div id="imageContainer">
+                <div id="imageBackground" class="pokemonBackground">
                 </div>
-            </div>
-            <p><strong>Pokedex number: #<span id="pokedexNum"></span></strong></p>
-            <h3>Description</h3>
-            <p id="description"></p>
-            <div id="favButtonContainer">
-                <button id="favButton" class="active">Add to My Favourite Pokemon</button>
+                <img src="" alt="" id="image">
+                <p id="loadingText" class="hidden">Loading<span>.</span><span>.</span><span>.</span></p>
+                <p id="errorText" class="hidden">Error</p>
             </div>
         </div>
-
-        <div id="typeInfo" class="panel main">
-            <h2 id="typeInfoHeading">Type info</h2>
-            <p><span class="pokemonName"></span>'s type(s): <span id="typesList"></span></p>
-            <h4>On offense:</h4>
-            <div id="offenseTablesContainer"></div>
-            <h4>On defense:</h4>
-            <div id="defenseTablesContainer">
-                <table id="defenseTable" class="typeTable">
-                    <thead>
-                        <th>Attacking type</th>
-                        <th>Damage received</th>
-                    </thead>
-                    <tbody id="defenseTBody"></tbody>
-                </table>
-            </div>
+        <p><strong>Pokedex number: #<span id="pokedexNum"></span></strong></p>
+        <h3>Description</h3>
+        <p id="description"></p>
+        <div id="favButtonContainer">
+            <button id="favButton" class="active">Add to My Favourite Pokemon</button>
         </div>
+    </div>
 
-        <div id="favsPanel" class="panel main">
-            <h2>My Favourite Pokemon</h2>
-            <div id="favsContainer"></div>
-            <div id="clearButtonContainer">
-                <button id="clearButton">Clear Favourites</button>
-            </div>
+    <div id="typeInfo" class="panel main">
+        <h2 id="typeInfoHeading">Type info</h2>
+        <p><span class="pokemonName"></span>'s type(s): <span id="typesList"></span></p>
+        <h4>On offense:</h4>
+        <div id="offenseTablesContainer"></div>
+        <h4>On defense:</h4>
+        <div id="defenseTablesContainer">
+            <table id="defenseTable" class="typeTable">
+                <thead>
+                    <th>Attacking type</th>
+                    <th>Damage received</th>
+                </thead>
+                <tbody id="defenseTBody"></tbody>
+            </table>
         </div>
+    </div>
 
-        <div id="sidebar" class="panel">
-            <h3 id="sidebarHeading">All Pokemon:</h3>
-            <table id="allPokemonTable"></table>
+    <div id="favsPanel" class="panel main">
+        <h2>My Favourite Pokemon</h2>
+        <div id="favsContainer"></div>
+        <div id="clearButtonContainer">
+            <button id="clearButton">Clear Favourites</button>
         </div>
+    </div>
 
-        <div id="footer" class="panel">
-            <p>Pokemon Data Viewer created by Sunnie</p>
-            <a href="https://www.pokemon.com/">Official Pokemon Page</a>
-        </div>
+    <div id="sidebar" class="panel">
+        <h3 id="sidebarHeading">All Pokemon:</h3>
+        <table id="allPokemonTable"></table>
+    </div>
 
-    </body>
+    <div id="footer" class="panel">
+        <p>Pokemon Data Viewer created by Sunnie</p>
+        <a href="https://www.pokemon.com/">Official Pokemon Page</a>
+    </div>
+
+</body>
 
 </html>

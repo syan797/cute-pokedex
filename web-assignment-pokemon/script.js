@@ -1,5 +1,5 @@
-window.addEventListener("load", function(){
-    
+window.addEventListener("load", function () {
+
     // This variable stores the dexNumber of the currently displayed Pokemon.
     let currentPokemonDexNum;
 
@@ -72,12 +72,12 @@ window.addEventListener("load", function(){
     async function loadSidebar() {
         let pokemonArray = await getPokemonArray();
         let pokemonTable = document.querySelector("#allPokemonTable");
-        
+
         for (let i = 0; i < pokemonArray.length; i++) {
             //Creating a new row & cell
             let newRow = document.createElement("tr");
             let newCell = document.createElement("td");
-            
+
             //Setting up new cell with appropriate name and event listener
             let pokemon = pokemonArray[i];
             newCell.innerText = pokemon.name;
@@ -187,7 +187,7 @@ window.addEventListener("load", function(){
         let typesList = getAndClearContainer("#typesList");
         let offenseInfo = getAndClearContainer("#offenseTablesContainer");
         let defenseInfo = getAndClearContainer("#defenseTBody");
-        
+
         //Getting array of types
         let typesArray = pokemonObj.types;
 
@@ -196,21 +196,21 @@ window.addEventListener("load", function(){
         typesArray.forEach((type) => addOffenseTable(type, offenseInfo));
         addDefenseTable(currentPokemonDexNum, defenseInfo);
     }
-    
+
     //Displays comma-separated list of types
     function insertTypesList(typesArray, container) {
         for (let i = 0; i < typesArray.length; i++) {
             //Adds each type to list
             type = typesArray[i];
             container.innerHTML += type;
-            
+
             //Adds comma & space if this is not the last item in the array
-            if (i != typesArray.length-1) {
+            if (i != typesArray.length - 1) {
                 container.innerHTML += ", ";
             }
         }
     }
-    
+
     //Clears & returns element on page with given selector (used to clear existing type info)
     function getAndClearContainer(selector) {
         let container = document.querySelector(selector);
@@ -223,7 +223,7 @@ window.addEventListener("load", function(){
         //Setting up the table
         let table = document.createElement("table");
         table.classList.add("typeTable");
-        table.innerHTML =   `<thead>
+        table.innerHTML = `<thead>
                                 <tr>
                                     <th colspan="2">${type} type attacks:</th>
                                 </tr>
@@ -249,7 +249,7 @@ window.addEventListener("load", function(){
         //Retrieving the defense data
         let defenseResponse = await fetch(`https://cs719-a01-pt-server.trex-sandwich.com/api/pokemon/${dexNum}/defense-profile`);
         let defenseArray = await defenseResponse.json();
-        
+
         //Adding the data to the table
         defenseArray.forEach((rowInfo) => addRowInfo(rowInfo, container));
     }
@@ -305,12 +305,12 @@ window.addEventListener("load", function(){
     /* 
     Functions for favourites section:
     */
-    
+
     //Gets the current array of favourites from local storage
     function getFavs() {
         //Getting "favs" from local storage
         let favs = localStorage.getItem("favs");
-        
+
         //Setting "favs" to empty array if it does not already exist
         if (favs !== null) {
             favs = JSON.parse(favs);
@@ -328,12 +328,12 @@ window.addEventListener("load", function(){
         let favs = getFavs();
         favs.push(currentPokemonDexNum);
         localStorage.setItem("favs", JSON.stringify(favs));
-        
+
         //Updating relevant parts of page
         updateFavsSection();
         updateFavButton();
     }
-    
+
     //Removes the dexNumber of the currently displayed Pokemon from the "favs" array in local storage
     function removeFromFavs() {
         let favs = getFavs();
@@ -369,22 +369,22 @@ window.addEventListener("load", function(){
             favsContainer.innerHTML = "<p>No favourites to display.</p>";
         }
     }
-    
+
     //Displays the Pokemon with the given dexNumber in the Favourites panel
     async function displayImageInFavs(dexNum) {
         //Creating a new div to contain this specific Pokemon
         let favPokemon = document.createElement("div");
         favPokemon.classList.add("favPokemonContainer");
-        
+
         //Adding the new div to the "#favsContainer" div
         const favsContainer = document.querySelector("#favsContainer");
         favsContainer.appendChild(favPokemon);
-        
+
         //Adding a background div to the new div
         let bkg = document.createElement("div");
         bkg.classList.add("pokemonBackground", "favBackground");
         favPokemon.appendChild(bkg);
-        
+
         //Getting the image for the Pokemon with the given dexNumber
         let pokemonObj = await getPokemon(dexNum);
         let img = document.createElement("img");
@@ -396,7 +396,7 @@ window.addEventListener("load", function(){
         img.addEventListener("click", () => displayPokemon(pokemonObj.dexNumber));
         img.addEventListener("mouseenter", () => favPokemon.classList.add("highlight"));
         img.addEventListener("mouseleave", () => favPokemon.classList.remove("highlight"));
-        
+
         //Adding the image to the new div
         favPokemon.appendChild(img);
     }
